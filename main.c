@@ -4,31 +4,49 @@
 #define N 10000000
 #define M_PI 3.14159265358979323846	
 
-void FuncArray(double* my_array, int len)
+inline void double_arr_fill(double* arr, int len)
 {
-	int cur_angle = 0;
+	double cur_angle = 0;
+	double angle_inc = 2 * M_PI / len; //0 — 2*Pi
+	double sum = 0;
 
-	#pragma acc kernel
 	for (long long i = 0; i < len; i++)
 	{
-		my_array[i] = sin(cur_angle);
-		cur_angle += 2 * M_PI / N;
-	}
-
-	double sum = 0; 
-	#pragma acc kernel
-	for (int i = 0; i < N; i++)
-	{
-		sum += my_array[i];
+		arr[i] = sin(cur_angle);
+		cur_angle += angle_inc;
 	}
 	
+	for (long long i = 0; i < len; i++)
+	{
+		sum += arr[i];
+	}
+}
+inline void float_arr_fill(float* arr, int len)
+{
+	float cur_angle = 0;
+	float angle_inc = 2 * M_PI / len;
+	float sum = 0;
+
+	for (long long i = 0; i < len; i++)
+	{
+		arr[i] = sinf(cur_angle);
+		cur_angle += angle_inc;
+	}
+	
+	for (long long i = 0; i < len; i++)
+	{
+		sum += arr[i];
+	}
 }
 
 int main()
 {
 	long long len = N;
-	double* array = (double*)malloc(sizeof(double) * len);
-	FuncArray(array, len);
+	double* d_arr = (double*)malloc(sizeof(double) * len);
+	float* f_arr = (float*)malloc(sizeof(float) * len);
+	
+	double_arr_fill(d_arr, len);
+	float_arr_fill(f_arr, len);
 
 	return 0;
 }
