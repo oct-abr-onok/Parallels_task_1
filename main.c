@@ -28,7 +28,6 @@ inline void double_arr_fill(double *arr, int len)
 
 inline void float_arr_fill(float *arr, int len)
 {
-	float cur_angle = 0;
 	float angle_inc = 2 * M_PI / len;
 	float sum = 0;
 #pragma data copy(arr [0:len])
