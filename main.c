@@ -10,12 +10,14 @@ inline void double_arr_fill(double* arr, int len)
 	double angle_inc = 2 * M_PI / len; //0 — 2*Pi
 	double sum = 0;
 
+#pragma acc kernels
 	for (long long i = 0; i < len; i++)
 	{
 		arr[i] = sin(cur_angle);
 		cur_angle += angle_inc;
 	}
 	
+#pragma acc kernels
 	for (long long i = 0; i < len; i++)
 	{
 		sum += arr[i];
@@ -27,12 +29,14 @@ inline void float_arr_fill(float* arr, int len)
 	float angle_inc = 2 * M_PI / len;
 	float sum = 0;
 
+#pragma acc kernels
 	for (long long i = 0; i < len; i++)
 	{
 		arr[i] = sinf(cur_angle);
 		cur_angle += angle_inc;
 	}
 	
+#pragma acc kernels
 	for (long long i = 0; i < len; i++)
 	{
 		sum += arr[i];
@@ -47,6 +51,9 @@ int main()
 	
 	double_arr_fill(d_arr, len);
 	float_arr_fill(f_arr, len);
+
+	free(d_arr);
+	free(f_arr);
 
 	return 0;
 }
