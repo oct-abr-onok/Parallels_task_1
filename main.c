@@ -4,19 +4,18 @@
 #include <math.h>
 #define N 10000000
 
-inline void double_arr_fill(double* arr, int len)
+inline void double_arr_fill(double *arr, int len)
 {
 	double cur_angle = 0;
-	double angle_inc = 2 * M_PI / len; //0 — 2*Pi
+	double angle_inc = 2 * M_PI / len; // 0 — 2*Pi
 	double sum = 0;
 
 #pragma acc kernels
 	for (long long i = 0; i < len; i++)
 	{
-		arr[i] = sin(cur_angle);
-		cur_angle += angle_inc;
+		arr[i] = sin(angle_inc * i);
 	}
-	
+
 #pragma acc kernels
 	for (long long i = 0; i < len; i++)
 	{
@@ -24,7 +23,7 @@ inline void double_arr_fill(double* arr, int len)
 	}
 }
 
-inline void float_arr_fill(float* arr, int len)
+inline void float_arr_fill(float *arr, int len)
 {
 	float cur_angle = 0;
 	float angle_inc = 2 * M_PI / len;
@@ -33,10 +32,9 @@ inline void float_arr_fill(float* arr, int len)
 #pragma acc kernels
 	for (long long i = 0; i < len; i++)
 	{
-		arr[i] = sinf(cur_angle);
-		cur_angle += angle_inc;
+		arr[i] = sinf(angle_inc * i);
 	}
-	
+
 #pragma acc kernels
 	for (long long i = 0; i < len; i++)
 	{
@@ -47,9 +45,9 @@ inline void float_arr_fill(float* arr, int len)
 int main()
 {
 	long long len = N;
-	double* d_arr = (double*)malloc(sizeof(double) * len);
-	float* f_arr = (float*)malloc(sizeof(float) * len);
-	
+	double *d_arr = (double *)malloc(sizeof(double) * len);
+	float *f_arr = (float *)malloc(sizeof(float) * len);
+
 	double_arr_fill(d_arr, len);
 	float_arr_fill(f_arr, len);
 
