@@ -1,8 +1,8 @@
+#define _USE_MATH_DEFINES
 #include <stdio.h>
 #include <malloc.h>
 #include <math.h>
 #define N 10000000
-#define M_PI 3.14159265358979323846	
 
 inline void double_arr_fill(double* arr, int len)
 {
@@ -23,6 +23,7 @@ inline void double_arr_fill(double* arr, int len)
 		sum += arr[i];
 	}
 }
+
 inline void float_arr_fill(float* arr, int len)
 {
 	float cur_angle = 0;
