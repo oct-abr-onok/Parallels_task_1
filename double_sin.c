@@ -45,7 +45,7 @@ int main()
 	free(d_arr);
 
 	time(&end);
-	printf("programm time = %lf", difftime(end, start));
+	printf("programm time = %lf\n", difftime(end, start));
 
 	return 0;
 }
