@@ -22,6 +22,7 @@ inline void float_arr_fill(float *arr, int len)
 			sum += arr[i];
 		}
 	}
+	printf("sum = %lf", sum);
 }
 
 int main()

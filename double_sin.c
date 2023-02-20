@@ -24,6 +24,7 @@ inline void double_arr_fill(double *arr, int len)
 			}
 		}
 	}
+	printf("sum = %lf", sum);
 }
 
 int main()
