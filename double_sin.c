@@ -8,6 +8,9 @@ inline void double_arr_fill(double *arr, int len)
 {
 	double angle_inc = 2 * M_PI / len; // 0 — 2*Pi
 	double sum = 0;
+	time_t start, end;
+
+	time(&start);
 #pragma data copy(arr [0:len])
 	{
 		{
@@ -24,17 +27,24 @@ inline void double_arr_fill(double *arr, int len)
 			}
 		}
 	}
+	time(&end);
+	printf("loops time = %lf\n", difftime(end, start));
 	printf("sum = %lf", sum);
 }
 
 int main()
 {
+	time_t start, end;
+	time(&start);
 	long long len = N;
 	double *d_arr = (double *)malloc(sizeof(double) * len);
 
 	double_arr_fill(d_arr, len);
 
 	free(d_arr);
+
+	time(&end);
+	printf("programm time = %lf", difftime(end, start));
 
 	return 0;
 }
