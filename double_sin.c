@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <malloc.h>
 #include <math.h>
+#include <time.h>
 #define N 10000000
 
 inline void double_arr_fill(double *arr, int len)
