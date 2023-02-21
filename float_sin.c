@@ -10,7 +10,6 @@ inline void float_arr_fill(float *arr, int len)
 	float angle_inc = 2 * M_PI / len;
 	float sum = 0;
 	clock_t start, end;
-
 	
 #pragma data copyout(arr [:len]) copy(sum) copyin(angle_inc)
 	{

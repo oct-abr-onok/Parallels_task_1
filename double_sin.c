@@ -14,7 +14,7 @@ inline void double_arr_fill(double *arr, int len)
 #pragma data copyout(arr [:len]) copy(sum) copyin(angle_inc)
 	{
 		start = clock();
-		{
+		
 #pragma acc kernels
 			for (long long i = 0; i < len; i++)
 			{
@@ -26,7 +26,7 @@ inline void double_arr_fill(double *arr, int len)
 			{
 				sum += arr[i];
 			}
-		}
+		
 	end = clock();
 	}
 	
