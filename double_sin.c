@@ -31,7 +31,7 @@ inline void double_arr_fill(double *arr, int len)
 	}
 	
 	printf("loops time = %lf\n", (double)(end - start) / CLOCKS_PER_SEC);
-	printf("sum = %lf", sum);
+	printf("sum = %lf\n", sum);
 }
 
 int main()

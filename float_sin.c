@@ -26,7 +26,7 @@ inline void float_arr_fill(float *arr, int len)
 		{
 			sum += arr[i];
 		}
-		end = time();
+		end = clock();
 	}
 	
 	printf("loops time = %lf\n", (double)(end - start) / CLOCKS_PER_SEC);
