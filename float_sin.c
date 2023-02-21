@@ -44,7 +44,7 @@ int main()
 	free(f_arr);
 
 	end = clock();
-	printf("programm time = %lf\n", (double)(end - start) / CLOCKS_PER_SEC);
+	printf("programm time = %lf\n\n", (double)(end - start) / CLOCKS_PER_SEC);
 
 	return 0;
 }
