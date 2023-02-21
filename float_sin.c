@@ -12,7 +12,7 @@ inline void float_arr_fill(float *arr, int len)
 	clock_t start, end;
 
 	
-#pragma data copyout(arr [:len]) copy(sum) copyin(angle_inc)
+#pragma acc data create(arr[:len]) copy(sum) copyin(angle_inc)
 	{
 		start = clock();
 #pragma acc kernels
