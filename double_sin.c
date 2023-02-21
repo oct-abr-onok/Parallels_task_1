@@ -9,11 +9,11 @@ inline void double_arr_fill(double *arr, int len)
 {
 	double angle_inc = 2 * M_PI / len; // 0 — 2*Pi
 	double sum = 0;
-	time_t start, end;
-
-	time(&start);
+	clock_t start, end;
+	
 #pragma data create(arr [0:len]) copy(sum) copyin(angle_inc)
 	{
+		start = clock();
 		{
 #pragma acc kernels
 			for (long long i = 0; i < len; i++)
@@ -27,16 +27,17 @@ inline void double_arr_fill(double *arr, int len)
 				sum += arr[i];
 			}
 		}
+	end = clock();
 	}
-	time(&end);
-	printf("loops time = %lf\n", difftime(end, start));
+	
+	printf("loops time = %lf\n", (double)(end - start) / CLOCKS_PER_SEC);
 	printf("sum = %lf", sum);
 }
 
 int main()
 {
-	time_t start, end;
-	time(&start);
+	clock_t start, end;
+	start = clock();
 	long long len = N;
 	double *d_arr = (double *)malloc(sizeof(double) * len);
 
@@ -44,8 +45,8 @@ int main()
 
 	free(d_arr);
 
-	time(&end);
-	printf("programm time = %lf\n", difftime(end, start));
+	end = clock();
+	printf("programm time = %lf\n", (double)(end - start) / CLOCKS_PER_SEC);
 
 	return 0;
 }
