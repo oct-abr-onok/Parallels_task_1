@@ -11,7 +11,7 @@ inline void double_arr_fill(double *arr, int len)
 	double sum = 0;
 	clock_t start, end;
 	
-#pragma data create(arr [0:len]) copy(sum) copyin(angle_inc)
+#pragma data copyout(arr [:len]) copy(sum) copyin(angle_inc)
 	{
 		start = clock();
 		{
