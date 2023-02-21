@@ -10,7 +10,7 @@ inline void float_arr_fill(float *arr, int len)
 	float angle_inc = 2 * M_PI / len;
 	float sum = 0;
 	clock_t start, end;
-	
+
 #pragma acc data create(arr[:len]) copy(sum) copyin(angle_inc)
 	{
 		start = clock();
@@ -19,7 +19,6 @@ inline void float_arr_fill(float *arr, int len)
 		{
 			arr[i] = sinf(angle_inc * i);
 		}
-
 #pragma acc kernels
 		for (long long i = 0; i < len; i++)
 		{
@@ -27,7 +26,7 @@ inline void float_arr_fill(float *arr, int len)
 		}
 		end = clock();
 	}
-	
+
 	printf("loops time = %lf\n", (double)(end - start) / CLOCKS_PER_SEC);
 	printf("sum = %lf\n", sum);
 }
